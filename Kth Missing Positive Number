@@ -1,0 +1,42 @@
+class Solution {
+public:
+    int findKthPositive(vector<int>& arr, int k) {
+       int diff=arr[0];
+        int cnt=arr[0]-1;
+        int ans=0;
+        bool ok=false;
+        if(k<arr[0])
+        {
+            return k;
+        }
+        for(int i=0;i<arr.size();i++)
+        {
+            if(arr[i]-i!=diff)
+            {
+                while(arr[i]-i>diff)
+                {
+
+                    ans=diff+i;
+                    cnt++;
+                    diff++;
+                    if(cnt==k)
+                    {
+                        ok=true;
+                        break;
+                    }
+
+                }
+                diff=arr[i]-i;
+            }
+            if(ok==true) break;
+        }
+        if(cnt!=k)
+        {
+            ans=arr[arr.size()-1]+k-cnt;
+        }
+        return ans;
+        
+    }
+};
+
+// problem link : https://leetcode.com/problems/kth-missing-positive-number/
