@@ -1,0 +1,39 @@
+class Solution {
+public:
+    int maxOperations(vector<int>& nums, int k) {
+      ios_base::sync_with_stdio(false); cin.tie(0); cout.tie(0); cin.clear(); 
+        int n=nums.size();
+
+        unordered_map<int,int> mp;
+
+        for(int i=0;i<n;i++)
+        {
+            mp[nums[i]]++;
+        }
+
+        int cnt=0;
+
+        for(int i=0;i<n;i++)
+        {
+            int f=k-nums[i];
+            if(mp[f]>=1 and mp[nums[i]]>=1)
+            {
+                if(f==nums[i] and mp[f]>=2)
+                {
+                    cnt+=1;
+                    mp[f]-=2;
+                }
+                else if(f!=nums[i]){
+                cnt+=min(mp[f],mp[nums[i]]);
+                int l=min(mp[f],mp[nums[i]]);
+                mp[f]-=l;
+                mp[nums[i]]-=l;
+                }
+            }
+        }
+        return cnt;
+        
+    }
+};
+
+// problem link : https://leetcode.com/problems/max-number-of-k-sum-pairs/
