@@ -1,0 +1,53 @@
+class Solution {
+public:
+    vector<int> twoSum(vector<int>& nums, int target) {
+        multimap<int,int> mp;
+        int n=nums.size();
+        for(int i=0;i<n;i++)
+        {
+            mp.insert({nums[i],i});
+        }
+        int a=-1;
+        int b=-1;
+
+        for(int i=0;i<n;i++)
+        {
+            int f=target-nums[i];
+            auto p=mp.find(nums[i]);
+            pair<int,int> m=*p;
+            a=m.second;
+            if(f==nums[i])
+            {
+                mp.erase(p);
+                p=mp.find(f);
+               bool  ok=false;
+                if(p!=mp.end())
+                {
+                    m=*p;
+                    b=m.second;
+                    ok=true;
+
+                }
+                if(ok) break;
+            }
+            else
+            {
+               p= mp.find(f);
+             bool  ok=false;
+               if(p!=mp.end())
+               {
+                   m=*p;
+                   b=m.second;
+                   ok=true;
+               }
+               if(ok) break;
+
+            }
+        }
+        vector<int> vec({a,b});
+        return vec;
+       
+    }
+};
+
+// problem link : https://leetcode.com/problems/two-sum/
